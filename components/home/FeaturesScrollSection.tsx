@@ -106,18 +106,18 @@ function FeatureMockups({ feature }: { feature: (typeof features)[0] }) {
     feature.tertiaryImageSrc
   ) {
     return (
-      <div className="relative h-[20rem] w-full max-w-[21rem] overflow-visible sm:h-[25rem] sm:max-w-[30rem] lg:h-[29rem] lg:max-w-[34rem]">
-        <div className="absolute left-[-10%] top-1/2 w-[49%] -translate-y-1/2 -rotate-12">
+      <div className="relative h-[18rem] w-full max-w-[18rem] overflow-visible sm:h-[25rem] sm:max-w-[30rem] lg:h-[29rem] lg:max-w-[34rem]">
+        <div className="absolute left-0 top-1/2 w-[45%] -translate-y-1/2 -rotate-10 sm:left-[-10%] sm:w-[49%] sm:-rotate-12 lg:left-0">
           <PhoneMockup
             src={feature.secondaryImageSrc}
             alt={feature.secondaryImageAlt}
             className="shadow-[0_0_40px_rgba(170,125,255,0.1)]"
           />
         </div>
-        <div className="absolute left-1/2 top-1/2 z-20 w-[60%] -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute left-1/2 top-1/2 z-20 w-[56%] -translate-x-1/2 -translate-y-1/2 sm:w-[60%]">
           <PhoneMockup src={feature.imageSrc} alt={feature.imageAlt} />
         </div>
-        <div className="absolute right-[-10%] top-1/2 w-[49%] -translate-y-1/2 rotate-12">
+        <div className="absolute right-0 top-1/2 w-[45%] -translate-y-1/2 rotate-10 sm:right-[-10%] sm:w-[49%] sm:rotate-12 lg:right-0">
           <PhoneMockup
             src={feature.tertiaryImageSrc}
             alt={feature.tertiaryImageAlt}
@@ -130,15 +130,15 @@ function FeatureMockups({ feature }: { feature: (typeof features)[0] }) {
 
   if (feature.mockupLayout === "double" && feature.secondaryImageSrc) {
     return (
-      <div className="relative h-[20rem] w-full max-w-[21rem] overflow-visible sm:h-[25rem] sm:max-w-[30rem] lg:h-[29rem] lg:max-w-[34rem]">
-        <div className="absolute left-[-4%] top-1/2 w-[49%] -translate-y-1/2 -rotate-10 sm:-rotate-12">
+      <div className="relative h-[18rem] w-full max-w-[18rem] overflow-visible sm:h-[25rem] sm:max-w-[30rem] lg:h-[29rem] lg:max-w-[34rem]">
+        <div className="absolute left-0 top-1/2 w-[45%] -translate-y-1/2 -rotate-8 sm:left-[-4%] sm:w-[49%] sm:-rotate-12 lg:left-0">
           <PhoneMockup
             src={feature.secondaryImageSrc}
             alt={feature.secondaryImageAlt}
             className="shadow-[0_0_45px_rgba(170,125,255,0.12)]"
           />
         </div>
-        <div className="absolute right-[-4%] top-1/2 z-20 w-[60%] -translate-y-1/2 rotate-6 sm:rotate-[7deg]">
+        <div className="absolute right-0 top-1/2 z-20 w-[56%] -translate-y-1/2 rotate-5 sm:right-[-4%] sm:w-[60%] sm:rotate-[7deg] lg:right-0">
           <PhoneMockup src={feature.imageSrc} alt={feature.imageAlt} />
         </div>
       </div>
@@ -146,8 +146,8 @@ function FeatureMockups({ feature }: { feature: (typeof features)[0] }) {
   }
 
   return (
-    <div className="relative h-[20rem] w-full max-w-[21rem] overflow-visible sm:h-[25rem] sm:max-w-[30rem] lg:h-[29rem] lg:max-w-[34rem]">
-      <div className="absolute left-1/2 top-1/2 z-20 w-[60%] -translate-x-1/2 -translate-y-1/2">
+    <div className="relative h-[18rem] w-full max-w-[18rem] overflow-visible sm:h-[25rem] sm:max-w-[30rem] lg:h-[29rem] lg:max-w-[34rem]">
+      <div className="absolute left-1/2 top-1/2 z-20 w-[56%] -translate-x-1/2 -translate-y-1/2 sm:w-[60%]">
         <PhoneMockup src={feature.imageSrc} alt={feature.imageAlt} />
       </div>
     </div>
