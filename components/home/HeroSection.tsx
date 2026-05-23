@@ -116,22 +116,22 @@ export default function HeroSection() {
           Supports TCGPlayer, Cardmarket &amp; Ebay &middot; Graded Card
           Prices
         </motion.p>
-      </div>
 
-      <motion.a
-        initial={{ opacity: 0, y: -8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.5,
-          delay: 0.9,
-          y: { repeat: Infinity, repeatType: "reverse", duration: 0.9 },
-        }}
-        href="#features"
-        aria-label="Scroll to features"
-        className="absolute bottom-8 left-1/2 flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full border border-card-border bg-surface/80 text-text-secondary shadow-[0_0_32px_rgba(170,125,255,0.16)] backdrop-blur-sm transition-colors hover:text-text-primary sm:hidden"
-      >
-        <ChevronDown size={26} />
-      </motion.a>
+        <motion.a
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.5,
+            delay: 0.9,
+            y: { repeat: Infinity, repeatType: "reverse", duration: 0.9 },
+          }}
+          href="#features"
+          aria-label="Scroll to features"
+          className="mt-8 flex h-12 w-12 items-center justify-center rounded-full border border-card-border bg-surface/80 text-text-secondary shadow-[0_0_32px_rgba(170,125,255,0.16)] backdrop-blur-sm transition-colors hover:text-text-primary sm:hidden"
+        >
+          <ChevronDown size={26} />
+        </motion.a>
+      </div>
     </section>
   );
 }
