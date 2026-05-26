@@ -48,7 +48,7 @@ export default function ContactSection() {
     <section
       id="testing-phase-2"
       ref={ref}
-      className="relative scroll-mt-24 overflow-hidden py-16 sm:py-24"
+      className="relative scroll-mt-24 overflow-hidden py-10 sm:py-16"
     >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(170,125,255,0.2)_0%,_transparent_62%)]" />
 

@@ -11,10 +11,10 @@ const games = [
 ];
 
 const postReleasePlans = [
-  "Japanese and Chinese cards",
-  "All graded companies",
-  "Improving color matching ever more",
   "Camera scan for cards",
+  "Japanese and Chinese cards",
+  "All grading companies",
+  "Improving color matching ever more",
 ];
 
 export default function ComingSoonSection() {
@@ -22,7 +22,7 @@ export default function ComingSoonSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative py-12 sm:py-24">
+    <section className="relative py-8 sm:py-14">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(232,121,249,0.1)_0%,_transparent_60%)]" />
 
@@ -60,7 +60,7 @@ export default function ComingSoonSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.4, delay: 0.75 }}
-            className="mt-10 border-t border-card-border/70 pt-8"
+            className="mt-8 border-t border-card-border/70 pt-7"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-light mb-5">
               Planned after release
@@ -72,10 +72,18 @@ export default function ComingSoonSection() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.3, delay: 0.85 + i * 0.08 }}
-                  className="flex items-center gap-3 rounded-2xl border border-card-border bg-card-bg/70 px-4 py-3 text-left"
+                  className={`flex items-center gap-3 rounded-2xl border px-4 py-3 text-left ${
+                    i === 0
+                      ? "border-primary/60 bg-primary/15 shadow-[0_0_32px_rgba(170,125,255,0.18)]"
+                      : "border-card-border bg-card-bg/70"
+                  }`}
                 >
                   <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-primary-light shadow-[0_0_16px_rgba(187,154,255,0.6)]" />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span
+                    className={`text-sm font-medium ${
+                      i === 0 ? "text-text-primary" : "text-text-secondary"
+                    }`}
+                  >
                     {plan}
                   </span>
                 </motion.div>

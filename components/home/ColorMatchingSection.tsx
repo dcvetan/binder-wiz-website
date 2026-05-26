@@ -32,9 +32,9 @@ export default function ColorMatchingSection() {
   const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   return (
-    <section ref={containerRef} className="py-14 sm:py-24">
+    <section ref={containerRef} className="py-10 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-12">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -81,6 +81,16 @@ export default function ColorMatchingSection() {
             </motion.div>
           ))}
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.55 }}
+          className="mx-auto mt-8 max-w-3xl text-center text-base leading-relaxed text-text-secondary sm:text-lg"
+        >
+          BinderWiz also helps you create polished, shareable collection visuals
+          like these, so your color-matched binder pages are easy to show off.
+        </motion.p>
       </div>
     </section>
   );

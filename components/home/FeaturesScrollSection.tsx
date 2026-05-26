@@ -10,6 +10,7 @@ import {
   BookOpen,
   Layers,
   Sparkles,
+  Upload,
 } from "lucide-react";
 import PhoneMockup from "@/components/ui/PhoneMockup";
 
@@ -97,6 +98,15 @@ const features = [
     secondaryImageSrc: "/images/mockups/features/expansions-1.png",
     secondaryImageAlt: "BinderWiz Pokemon TCG set completion progress screen",
   },
+  {
+    icon: Upload,
+    title: "Import From Apps and Sites",
+    description:
+      "Bring your collection over from other Pokemon TCG apps and sites. Import CSV exports from tools like Collectr, map cards into BinderWiz, and keep building without starting over.",
+    mockupLayout: "single",
+    imageSrc: "/images/mockups/features/import-csv.png",
+    imageAlt: "BinderWiz CSV import screen for moving a Pokemon TCG collection from other apps",
+  },
 ];
 
 function FeatureMockups({ feature }: { feature: (typeof features)[0] }) {
@@ -146,8 +156,8 @@ function FeatureMockups({ feature }: { feature: (typeof features)[0] }) {
   }
 
   return (
-    <div className="relative h-[18rem] w-full max-w-[18rem] overflow-visible sm:h-[25rem] sm:max-w-[30rem] lg:h-[29rem] lg:max-w-[34rem]">
-      <div className="absolute left-1/2 top-1/2 z-20 w-[56%] -translate-x-1/2 -translate-y-1/2 sm:w-[60%]">
+    <div className="relative h-[25rem] w-full max-w-[20rem] overflow-visible sm:h-[35rem] sm:max-w-[30rem] lg:h-[39rem] lg:max-w-[34rem]">
+      <div className="absolute left-1/2 top-1/2 z-20 w-[72%] -translate-x-1/2 -translate-y-1/2 sm:w-[58%] lg:w-[58%]">
         <PhoneMockup src={feature.imageSrc} alt={feature.imageAlt} />
       </div>
     </div>
