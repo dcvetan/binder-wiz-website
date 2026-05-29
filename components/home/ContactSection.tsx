@@ -4,8 +4,7 @@ import { FormEvent, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Mail, Sparkles } from "lucide-react";
 
-const formSubmitToken = "6a598b8e0a39184d2a15e0c00c841586";
-const signupEndpoint = `https://formsubmit.co/ajax/${formSubmitToken}`;
+const signupEndpoint = "/api/signup";
 
 export default function ContactSection() {
   const ref = useRef(null);
@@ -28,10 +27,6 @@ export default function ContactSection() {
         },
         body: JSON.stringify({
           email,
-          message: `${email} joined a waitlist!`,
-          _captcha: "false",
-          _subject: "New Test Signup",
-          _template: "table",
         }),
       });
 
