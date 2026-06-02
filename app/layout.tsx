@@ -4,16 +4,21 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.binderwiz.com"),
   title: {
     default: "BinderWiz — The #1 Pokémon TCG App for Card Prices, Portfolio & Color Matching",
     template: "%s | BinderWiz",
   },
   description:
     "Track Pokémon card prices from TCGPlayer & Cardmarket, build your portfolio, manage graded cards (PSA+), and find perfect cards with AI color matching. The ultimate Pokémon TCG app.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "BinderWiz — The #1 Pokémon TCG App",
     description:
       "Track Pokémon card prices, build your portfolio, manage graded cards, and find perfect cards with AI color matching.",
+    url: "/",
     type: "website",
     locale: "en_US",
     siteName: "BinderWiz",
