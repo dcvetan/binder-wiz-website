@@ -41,7 +41,7 @@ export default function HeroSection() {
         >
           <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
           <span className="text-text-secondary text-sm">
-            Coming soon for iOS &amp; Android
+            Public testing is live on iOS &amp; Android
           </span>
         </motion.div>
 
@@ -73,7 +73,7 @@ export default function HeroSection() {
           href="#testing-phase-2"
           className="mt-8 inline-flex min-h-12 items-center justify-center rounded-xl bg-primary px-6 font-semibold text-white transition-colors hover:bg-primary-light"
         >
-          Join the Testing Group
+          Start Testing BinderWiz
         </motion.a>
 
         {/* Phone Mockups */}
