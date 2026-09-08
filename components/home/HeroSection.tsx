@@ -7,11 +7,11 @@ import PhoneMockup from "@/components/ui/PhoneMockup";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 md:pt-16">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(170,125,255,0.15)_0%,_rgba(232,121,249,0.05)_40%,_transparent_70%)]" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center text-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 pt-10 sm:py-16 flex flex-col items-center text-center">
         {/* Logo */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -77,12 +77,12 @@ export default function HeroSection() {
         </motion.a>
 
         {/* Phone Mockups */}
-        <div className="mt-16 hidden items-end justify-center gap-2 sm:flex sm:gap-4 lg:gap-6">
+        <div className="mt-12 flex w-full max-w-[320px] items-end justify-center gap-1 sm:mt-16 sm:max-w-none sm:gap-4 lg:gap-6">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="hidden w-52 -rotate-6 sm:block lg:w-64 xl:w-72"
+            className="w-[28%] shrink-0 -rotate-6 sm:w-52 lg:w-64 xl:w-72"
           >
             <PhoneMockup alt="BinderWiz Pokemon TCG Cardmarket price history screen" src="/images/mockups/features/product-cardmarket-history.png" />
           </motion.div>
@@ -91,7 +91,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="w-60 lg:w-72 xl:w-80"
+            className="z-10 w-[36%] shrink-0 sm:w-60 lg:w-72 xl:w-80"
           >
             <PhoneMockup alt="BinderWiz Pokemon TCG Cardmarket portfolio screen" src="/images/mockups/hero-portfolio.png" />
           </motion.div>
@@ -100,7 +100,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="hidden w-52 rotate-6 sm:block lg:w-64 xl:w-72"
+            className="w-[28%] shrink-0 rotate-6 sm:w-52 lg:w-64 xl:w-72"
           >
             <PhoneMockup alt="BinderWiz Pokemon TCG Pokedex completion screen" src="/images/mockups/hero-pokedex.png" />
           </motion.div>

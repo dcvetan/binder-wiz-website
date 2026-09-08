@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import {
   Palette,
   BarChart3,
@@ -109,6 +109,9 @@ const features = [
   },
 ];
 
+const featureIds = ["portfolio", "price-details", "graded-prices", "color-matching", "page-upgrades", "pokedex", "expansions", "import"];
+const featureAccents = ["#e9c65c", "#76c8e5", "#e3ad89", "#bb9aff", "#f1a3cb", "#8cd0b0", "#88bdec", "#d3bf8c"];
+
 function FeatureMockups({ feature }: { feature: (typeof features)[0] }) {
   if (
     feature.mockupLayout === "triple" &&
@@ -173,12 +176,17 @@ function FeatureBlock({
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const reducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const drift = useTransform(scrollYProgress, [0, 1], [18, -18]);
+  const turn = useTransform(scrollYProgress, [0, 1], [1.2, -1.2]);
   const Icon = feature.icon;
 
   return (
     <div
       ref={ref}
-      className="grid grid-cols-1 items-center gap-20 py-24 sm:gap-16 sm:py-28 lg:grid-cols-2 lg:gap-20 lg:py-36"
+      id={featureIds[index]}
+      className="grid grid-cols-1 items-center gap-16 py-16 sm:gap-16 sm:py-24 lg:grid-cols-2 lg:gap-20 lg:py-32"
     >
       {/* Text - alternates side on desktop */}
       <motion.div
@@ -187,8 +195,11 @@ function FeatureBlock({
         transition={{ duration: 0.5 }}
         className={index % 2 === 1 ? "lg:order-2" : ""}
       >
-        <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary mb-4">
-          <Icon size={24} className="text-white" />
+        <div className="mb-5 flex items-center gap-4">
+          <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg border" style={{ color: featureAccents[index], backgroundColor: `${featureAccents[index]}12`, borderColor: `${featureAccents[index]}40` }}>
+            <Icon size={24} />
+          </div>
+          <span className="font-mono text-xs text-text-muted"><span style={{ color: featureAccents[index] }}>{String(index + 1).padStart(2, "0")}</span> / 08</span>
         </div>
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-text-primary mb-4">
           {feature.title}
@@ -200,6 +211,7 @@ function FeatureBlock({
 
       {/* Phone mockup */}
       <motion.div
+        style={{ y: reducedMotion ? 0 : drift, rotate: reducedMotion ? 0 : turn }}
         initial={{ opacity: 0, scale: 0.95 }}
         animate={isInView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.6, delay: 0.1 }}

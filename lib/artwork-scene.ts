@@ -2,7 +2,8 @@ import * as THREE from "three";
 
 export async function createArtworkScene(host: HTMLElement, { src, aspect, spin }: { src: string; aspect: number; spin: boolean }) {
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "low-power" });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const mobile = window.matchMedia("(pointer: coarse)").matches;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.5 : 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   const canvas = renderer.domElement;
   canvas.style.cssText = "position:absolute;inset:0;width:100%;height:100%;pointer-events:none";
@@ -43,25 +44,40 @@ export async function createArtworkScene(host: HTMLElement, { src, aspect, spin 
     if (side === -1) face.rotation.y = Math.PI;
     model.add(face);
   }
-  scene.add(model, new THREE.HemisphereLight(0xffffff, 0x777799, 3));
+  const deck = new THREE.Group();
+  const leftCard = model.clone();
+  const rightCard = model.clone();
+  if (spin) deck.add(leftCard, rightCard);
+  model.position.z = 0.06;
+  deck.add(model);
+  scene.add(deck, new THREE.HemisphereLight(0xffffff, 0x777799, 3));
   const light = new THREE.DirectionalLight(0xffffff, 4);
   light.position.set(-3, 4, 5);
   scene.add(light);
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
   let reducedMotion = media.matches, paused = reducedMotion;
   let targetX = spin ? -0.08 : 0, targetY = spin ? -0.22 : 0;
-  let frame = 0, visible = false, last = 0, idleTime = 0;
+  let frame = 0, visible = false, last = 0, idleTime = 0, scrollFrame = 0;
+  let spread = 0, targetSpread = reducedMotion ? 0.75 : 0;
   let pointer: { id: number; x: number; y: number; rx: number; ry: number } | null = null;
-  model.rotation.set(targetX, targetY, spin ? -0.04 : 0);
+  deck.rotation.set(targetX, targetY, spin ? -0.04 : 0);
   const render = (now: number) => {
+    if (mobile && now - last < 1000 / 30) { frame = requestAnimationFrame(render); return; }
     const dt = Math.min((now - last) / 1000 || 0, 0.05);
     last = now;
-    if (spin && !paused && !pointer) { targetY += dt * 0.22; idleTime += dt; }
-    model.rotation.x = THREE.MathUtils.damp(model.rotation.x, targetX, 10, dt);
-    model.rotation.y = THREE.MathUtils.damp(model.rotation.y, targetY, 10, dt);
-    model.position.y = spin && !reducedMotion && !paused ? Math.sin(idleTime * 1.2) * 0.04 : 0;
+    if (spin && !paused && !pointer) idleTime += dt;
+    const breathe = spin && !paused && !pointer ? Math.sin(idleTime * 0.7) * 0.12 : 0;
+    deck.rotation.x = THREE.MathUtils.damp(deck.rotation.x, targetX, 10, dt);
+    deck.rotation.y = THREE.MathUtils.damp(deck.rotation.y, targetY + breathe, 10, dt);
+    deck.position.y = spin && !reducedMotion && !paused ? Math.sin(idleTime * 1.2) * 0.035 : 0;
+    spread = THREE.MathUtils.damp(spread, targetSpread, 7, dt);
+    for (const [card, direction] of [[leftCard, -1], [rightCard, 1]] as const) {
+      card.position.set(direction * w * 0.58 * spread, -0.12 * spread, -0.06);
+      card.rotation.z = direction * -0.22 * spread;
+      card.rotation.y = direction * -0.14 * spread;
+    }
     renderer.render(scene, camera);
-    const settling = Math.abs(targetX - model.rotation.x) + Math.abs(targetY - model.rotation.y) > 0.0001;
+    const settling = Math.abs(targetX - deck.rotation.x) + Math.abs(targetY + breathe - deck.rotation.y) + Math.abs(targetSpread - spread) > 0.0001;
     frame = visible && !document.hidden && (settling || (spin && !paused)) ? requestAnimationFrame(render) : 0;
   };
   const wake = () => { if (!frame && visible && !document.hidden) { last = performance.now(); frame = requestAnimationFrame(render); } };
@@ -71,7 +87,7 @@ export async function createArtworkScene(host: HTMLElement, { src, aspect, spin 
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
     // Frame the entire diagonal so rotations never clip on narrow screens.
-    const extent = Math.max(h / 0.78, w / (camera.aspect * 0.78));
+    const extent = Math.max(h / (spin ? 0.68 : 0.78), w * (spin ? 2.5 : 1) / (camera.aspect * 0.85));
     camera.position.z = extent / (2 * Math.tan(THREE.MathUtils.degToRad(17.5)));
     camera.updateProjectionMatrix();
     wake();
@@ -103,9 +119,17 @@ export async function createArtworkScene(host: HTMLElement, { src, aspect, spin 
   const reset = () => { targetX = 0; targetY = Math.round(targetY / (2 * Math.PI)) * 2 * Math.PI; wake(); };
   const leave = () => { if (!spin && !pointer) reset(); };
   const motionChange = () => { reducedMotion = media.matches; if (reducedMotion) paused = true; wake(); };
+  const updateSpread = () => {
+    scrollFrame = 0;
+    if (!visible || !spin) return;
+    const bounds = host.getBoundingClientRect();
+    targetSpread = reducedMotion ? 0.75 : THREE.MathUtils.clamp((innerHeight * 0.9 - bounds.top) / (innerHeight * 0.4 + bounds.height * 0.35), 0, 1);
+    wake();
+  };
+  const onScroll = () => { if (visible && !scrollFrame) scrollFrame = requestAnimationFrame(updateSpread); };
   const visibilityChange = () => { if (document.hidden) { cancelAnimationFrame(frame); frame = 0; } else wake(); };
   host.appendChild(canvas);
-  const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) wake(); else { cancelAnimationFrame(frame); frame = 0; } });
+  const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) { updateSpread(); wake(); } else { cancelAnimationFrame(frame); frame = 0; } });
   observer.observe(host);
   const resizer = new ResizeObserver(resize);
   resizer.observe(host);
@@ -117,6 +141,7 @@ export async function createArtworkScene(host: HTMLElement, { src, aspect, spin 
   host.addEventListener("pointerleave", leave);
   document.addEventListener("visibilitychange", visibilityChange);
   media.addEventListener("change", motionChange);
+  window.addEventListener("scroll", onScroll, { passive: true });
   resize();
   return {
     reducedMotion,
@@ -124,7 +149,8 @@ export async function createArtworkScene(host: HTMLElement, { src, aspect, spin 
     reset,
     pause: (value: boolean) => { paused = value; wake(); },
     dispose: () => {
-      observer.disconnect(); resizer.disconnect(); cancelAnimationFrame(frame);
+      observer.disconnect(); resizer.disconnect(); cancelAnimationFrame(frame); cancelAnimationFrame(scrollFrame);
+      window.removeEventListener("scroll", onScroll);
       host.removeEventListener("pointerdown", down); host.removeEventListener("pointermove", move);
       host.removeEventListener("pointerup", up); host.removeEventListener("pointercancel", up);
       host.removeEventListener("lostpointercapture", up); host.removeEventListener("pointerleave", leave);

@@ -40,7 +40,7 @@ export default function ColorMatchingProcessSection() {
   const isInView = useInView(ref, { once: true, margin: "-120px" });
 
   return (
-    <section className="py-24 overflow-hidden">
+    <section ref={ref} className="py-16 sm:py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <motion.h2
@@ -64,7 +64,6 @@ export default function ColorMatchingProcessSection() {
         </div>
 
         <div
-          ref={ref}
           className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-start lg:gap-5"
         >
           {steps.map((step, index) => {
