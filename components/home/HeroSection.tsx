@@ -84,7 +84,7 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="hidden w-52 -rotate-6 sm:block lg:w-64 xl:w-72"
           >
-            <PhoneMockup alt="Pokemon TCG App binder screen" src="/images/mockups/front-color-matching.png" />
+            <PhoneMockup alt="BinderWiz Pokemon TCG Cardmarket price history screen" src="/images/mockups/features/product-cardmarket-history.png" />
           </motion.div>
 
           <motion.div
@@ -93,7 +93,7 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="w-60 lg:w-72 xl:w-80"
           >
-            <PhoneMockup alt="Pokemon card prices portfolio" src="/images/mockups/front-portfolio.png" />
+            <PhoneMockup alt="BinderWiz Pokemon TCG Cardmarket portfolio screen" src="/images/mockups/hero-portfolio.png" />
           </motion.div>
 
           <motion.div
@@ -102,7 +102,7 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="hidden w-52 rotate-6 sm:block lg:w-64 xl:w-72"
           >
-            <PhoneMockup alt="Pokemon card color matching feature" src="/images/mockups/front-pokedex.png" />
+            <PhoneMockup alt="BinderWiz Pokemon TCG Pokedex completion screen" src="/images/mockups/hero-pokedex.png" />
           </motion.div>
         </div>
 

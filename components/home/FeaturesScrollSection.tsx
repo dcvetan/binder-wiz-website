@@ -21,10 +21,10 @@ const features = [
     description:
       "Track your Pokemon card collection value in one portfolio. Follow live market prices from TCGPlayer and Cardmarket, monitor gains and losses, and see which cards are moving over time.",
     mockupLayout: "double",
-    imageSrc: "/images/mockups/features/price-second.png",
+    imageSrc: "/images/mockups/features/portfolio-tracking.png",
     imageAlt: "BinderWiz Pokemon TCG portfolio price tracking screen",
-    secondaryImageSrc: "/images/mockups/features/price-first.png",
-    secondaryImageAlt: "BinderWiz Pokemon TCG collection binder screen",
+    secondaryImageSrc: "/images/mockups/features/portfolio-products.png",
+    secondaryImageAlt: "BinderWiz Pokemon TCG collection product prices screen",
   },
   {
     icon: PackageSearch,
@@ -32,12 +32,12 @@ const features = [
     description:
       "Check price details for cards, booster boxes, packs, and other sealed Pokemon TCG products. Review price history, market movement, and quick value insights before you buy or sell.",
     mockupLayout: "triple",
-    imageSrc: "/images/mockups/features/price-details-2.png",
-    imageAlt: "BinderWiz Pokemon TCG product price details screen",
-    secondaryImageSrc: "/images/mockups/features/price-details-3.png",
-    secondaryImageAlt: "BinderWiz Pokemon TCG card price detail screen",
-    tertiaryImageSrc: "/images/mockups/features/price-details-1.png",
-    tertiaryImageAlt: "BinderWiz Pokemon TCG sealed product price detail screen",
+    imageSrc: "/images/mockups/features/product-tcgplayer-history.png",
+    imageAlt: "BinderWiz Pokemon TCG TCGPlayer price history screen",
+    secondaryImageSrc: "/images/mockups/features/product-cardmarket-history.png",
+    secondaryImageAlt: "BinderWiz Pokemon TCG Cardmarket price history screen",
+    tertiaryImageSrc: "/images/mockups/features/product-card-details.png",
+    tertiaryImageAlt: "BinderWiz Pokemon TCG card price detail screen",
   },
   {
     icon: ShieldCheck,
@@ -56,9 +56,9 @@ const features = [
     description:
       "Build better binders with smart card color matching. Get card recommendations based on dominant colors, gradients, artwork style, and your binder's overall aesthetic.",
     mockupLayout: "double",
-    imageSrc: "/images/mockups/features/features-binder.png",
+    imageSrc: "/images/mockups/features/color-matched-binder.png",
     imageAlt: "BinderWiz Pokemon card color matching binder screen",
-    secondaryImageSrc: "/images/mockups/front-color-matching.png",
+    secondaryImageSrc: "/images/mockups/features/color-matched-recommendations.png",
     secondaryImageAlt: "BinderWiz Pokemon card color matching recommendations screen",
   },
   {
@@ -93,9 +93,9 @@ const features = [
     description:
       "See how many cards you own from each expansion, follow your set completion progress, and quickly spot which cards are still missing from every set.",
     mockupLayout: "double",
-    imageSrc: "/images/mockups/features/expansions-2.png",
+    imageSrc: "/images/mockups/features/expansion-cards.png",
     imageAlt: "BinderWiz Pokemon TCG expansion completion tracker screen",
-    secondaryImageSrc: "/images/mockups/features/expansions-1.png",
+    secondaryImageSrc: "/images/mockups/features/expansion-overview.png",
     secondaryImageAlt: "BinderWiz Pokemon TCG set completion progress screen",
   },
   {
