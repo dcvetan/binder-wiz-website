@@ -1,3 +1,7 @@
+"use client";
+
+import { useImagePreview } from "@/components/ui/ExperienceProvider";
+
 interface PhoneMockupProps {
   src?: string;
   alt: string;
@@ -9,6 +13,7 @@ export default function PhoneMockup({
   alt,
   className = "",
 }: PhoneMockupProps) {
+  const openPreview = useImagePreview();
   return (
     <div
       className={`relative rounded-[1.7rem] border-2 border-card-border bg-card-bg p-1.5 shadow-[0_0_60px_rgba(170,125,255,0.15)] sm:rounded-[2.5rem] sm:p-2 ${className}`}
@@ -17,8 +22,9 @@ export default function PhoneMockup({
       <div className="absolute top-0 left-1/2 z-10 h-4 w-16 -translate-x-1/2 rounded-b-xl bg-card-bg sm:h-5 sm:w-20 sm:rounded-b-2xl" />
       <div className="relative flex aspect-[9/19.5] w-full items-center justify-center overflow-hidden rounded-[1.25rem] bg-surface sm:rounded-[2rem]">
         {src ? (
-          // Phone screenshots need the original PNG; optimized variants looked soft in rotated mockups.
-          // eslint-disable-next-line @next/next/no-img-element
+          <button type="button" aria-label={`Enlarge ${alt}`} title="Enlarge screenshot" onClick={() => openPreview({ src, alt })} className="absolute inset-0 cursor-zoom-in focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-primary">
+          <picture>
+          <source srcSet={src.replace(/\.png$/, ".webp")} type="image/webp" />
           <img
             src={src}
             alt={alt}
@@ -27,6 +33,8 @@ export default function PhoneMockup({
             loading="lazy"
             className="absolute inset-0 h-full w-full rounded-[1.25rem] object-cover [backface-visibility:hidden] [transform:translateZ(0)] sm:rounded-[2rem]"
           />
+          </picture>
+          </button>
         ) : (
           <div className="w-full h-full bg-gradient-to-b from-surface to-surface-light flex items-center justify-center">
             <span className="text-text-muted text-xs">{alt}</span>

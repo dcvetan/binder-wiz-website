@@ -76,7 +76,7 @@ export default function FeatureCardsSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 bg-surface/50">
+    <section className="py-16 sm:py-24 bg-surface/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-text-primary">
@@ -100,7 +100,7 @@ export default function FeatureCardsSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="group bg-surface border border-card-border rounded-2xl p-6 hover:scale-[1.03] hover:border-primary/30 transition-all duration-300"
+                className="group rounded-lg border border-card-border bg-surface p-5 transition-colors duration-200 hover:border-primary/50 sm:p-6"
               >
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary mb-4">
                   <Icon size={24} className="text-white" />

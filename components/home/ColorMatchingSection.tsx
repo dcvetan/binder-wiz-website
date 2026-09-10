@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useInView, useReducedMotion } from "framer-motion";
+import { useImagePreview } from "@/components/ui/ExperienceProvider";
 
 const palettes = [
   {
@@ -23,6 +24,8 @@ const palettes = [
 ];
 
 export default function ColorMatchingSection() {
+  const openPreview = useImagePreview();
+  const reducedMotion = useReducedMotion();
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
   const { scrollYProgress } = useScroll({
@@ -32,7 +35,7 @@ export default function ColorMatchingSection() {
   const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   return (
-    <section ref={containerRef} className="py-10 sm:py-16">
+    <section id="palettes" ref={containerRef} className="py-10 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 sm:mb-12">
           <motion.h2
@@ -55,7 +58,7 @@ export default function ColorMatchingSection() {
         </div>
 
         <motion.div
-          style={{ y }}
+          style={{ y: reducedMotion ? 0 : y }}
           className="grid grid-cols-1 gap-6 sm:grid-cols-3"
         >
           {palettes.map((palette, i) => (
@@ -66,8 +69,9 @@ export default function ColorMatchingSection() {
               transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
               className="relative aspect-[1074/1566] overflow-hidden rounded-xl border border-card-border bg-surface shadow-[0_0_48px_rgba(170,125,255,0.1)]"
             >
+              <button type="button" aria-label={`Enlarge ${palette.label}`} title={`Enlarge ${palette.label}`} className="absolute inset-0 cursor-zoom-in focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-primary" onClick={() => openPreview({ src: palette.src, alt: palette.alt })}>
               <Image
-                src={palette.src}
+                src={palette.src.replace(/\.png$/, ".webp")}
                 alt={palette.alt}
                 fill
                 sizes="(max-width: 640px) 92vw, 31vw"
@@ -75,6 +79,7 @@ export default function ColorMatchingSection() {
                 unoptimized
                 className="object-cover"
               />
+              </button>
               <span className="absolute left-3 top-3 rounded-full border border-white/15 bg-black/45 px-3 py-1 text-xs font-semibold text-white shadow-lg backdrop-blur-sm">
                 {palette.label}
               </span>

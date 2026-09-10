@@ -1,4 +1,5 @@
 import HeroSection from "@/components/home/HeroSection";
+import CardShowcaseSection from "@/components/home/CardShowcaseSection";
 import FeaturesScrollSection from "@/components/home/FeaturesScrollSection";
 import FeatureCardsSection from "@/components/home/FeatureCardsSection";
 import ColorMatchingProcessSection from "@/components/home/ColorMatchingProcessSection";
@@ -24,6 +25,7 @@ export default function Home() {
         }}
       />
       <HeroSection />
+      <CardShowcaseSection />
       <FeaturesScrollSection />
       <FeatureCardsSection />
       <ColorMatchingProcessSection />

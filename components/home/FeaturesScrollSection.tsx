@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import {
   Palette,
   BarChart3,
@@ -21,10 +21,10 @@ const features = [
     description:
       "Track your Pokemon card collection value in one portfolio. Follow live market prices from TCGPlayer and Cardmarket, monitor gains and losses, and see which cards are moving over time.",
     mockupLayout: "double",
-    imageSrc: "/images/mockups/features/price-second.png",
+    imageSrc: "/images/mockups/features/portfolio-tracking.png",
     imageAlt: "BinderWiz Pokemon TCG portfolio price tracking screen",
-    secondaryImageSrc: "/images/mockups/features/price-first.png",
-    secondaryImageAlt: "BinderWiz Pokemon TCG collection binder screen",
+    secondaryImageSrc: "/images/mockups/features/portfolio-products.png",
+    secondaryImageAlt: "BinderWiz Pokemon TCG collection product prices screen",
   },
   {
     icon: PackageSearch,
@@ -32,12 +32,12 @@ const features = [
     description:
       "Check price details for cards, booster boxes, packs, and other sealed Pokemon TCG products. Review price history, market movement, and quick value insights before you buy or sell.",
     mockupLayout: "triple",
-    imageSrc: "/images/mockups/features/price-details-2.png",
-    imageAlt: "BinderWiz Pokemon TCG product price details screen",
-    secondaryImageSrc: "/images/mockups/features/price-details-3.png",
-    secondaryImageAlt: "BinderWiz Pokemon TCG card price detail screen",
-    tertiaryImageSrc: "/images/mockups/features/price-details-1.png",
-    tertiaryImageAlt: "BinderWiz Pokemon TCG sealed product price detail screen",
+    imageSrc: "/images/mockups/features/product-tcgplayer-history.png",
+    imageAlt: "BinderWiz Pokemon TCG TCGPlayer price history screen",
+    secondaryImageSrc: "/images/mockups/features/product-cardmarket-history.png",
+    secondaryImageAlt: "BinderWiz Pokemon TCG Cardmarket price history screen",
+    tertiaryImageSrc: "/images/mockups/features/product-card-details.png",
+    tertiaryImageAlt: "BinderWiz Pokemon TCG card price detail screen",
   },
   {
     icon: ShieldCheck,
@@ -56,9 +56,9 @@ const features = [
     description:
       "Build better binders with smart card color matching. Get card recommendations based on dominant colors, gradients, artwork style, and your binder's overall aesthetic.",
     mockupLayout: "double",
-    imageSrc: "/images/mockups/features/features-binder.png",
+    imageSrc: "/images/mockups/features/color-matched-binder.png",
     imageAlt: "BinderWiz Pokemon card color matching binder screen",
-    secondaryImageSrc: "/images/mockups/front-color-matching.png",
+    secondaryImageSrc: "/images/mockups/features/color-matched-recommendations.png",
     secondaryImageAlt: "BinderWiz Pokemon card color matching recommendations screen",
   },
   {
@@ -93,9 +93,9 @@ const features = [
     description:
       "See how many cards you own from each expansion, follow your set completion progress, and quickly spot which cards are still missing from every set.",
     mockupLayout: "double",
-    imageSrc: "/images/mockups/features/expansions-2.png",
+    imageSrc: "/images/mockups/features/expansion-cards.png",
     imageAlt: "BinderWiz Pokemon TCG expansion completion tracker screen",
-    secondaryImageSrc: "/images/mockups/features/expansions-1.png",
+    secondaryImageSrc: "/images/mockups/features/expansion-overview.png",
     secondaryImageAlt: "BinderWiz Pokemon TCG set completion progress screen",
   },
   {
@@ -108,6 +108,9 @@ const features = [
     imageAlt: "BinderWiz CSV import screen for moving a Pokemon TCG collection from other apps",
   },
 ];
+
+const featureIds = ["portfolio", "price-details", "graded-prices", "color-matching", "page-upgrades", "pokedex", "expansions", "import"];
+const featureAccents = ["#e9c65c", "#76c8e5", "#e3ad89", "#bb9aff", "#f1a3cb", "#8cd0b0", "#88bdec", "#d3bf8c"];
 
 function FeatureMockups({ feature }: { feature: (typeof features)[0] }) {
   if (
@@ -173,12 +176,17 @@ function FeatureBlock({
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const reducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const drift = useTransform(scrollYProgress, [0, 1], [18, -18]);
+  const turn = useTransform(scrollYProgress, [0, 1], [1.2, -1.2]);
   const Icon = feature.icon;
 
   return (
     <div
       ref={ref}
-      className="grid grid-cols-1 items-center gap-20 py-24 sm:gap-16 sm:py-28 lg:grid-cols-2 lg:gap-20 lg:py-36"
+      id={featureIds[index]}
+      className="grid grid-cols-1 items-center gap-16 py-16 sm:gap-16 sm:py-24 lg:grid-cols-2 lg:gap-20 lg:py-32"
     >
       {/* Text - alternates side on desktop */}
       <motion.div
@@ -187,8 +195,11 @@ function FeatureBlock({
         transition={{ duration: 0.5 }}
         className={index % 2 === 1 ? "lg:order-2" : ""}
       >
-        <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary mb-4">
-          <Icon size={24} className="text-white" />
+        <div className="mb-5 flex items-center gap-4">
+          <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg border" style={{ color: featureAccents[index], backgroundColor: `${featureAccents[index]}12`, borderColor: `${featureAccents[index]}40` }}>
+            <Icon size={24} />
+          </div>
+          <span className="font-mono text-xs text-text-muted"><span style={{ color: featureAccents[index] }}>{String(index + 1).padStart(2, "0")}</span> / 08</span>
         </div>
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-text-primary mb-4">
           {feature.title}
@@ -200,6 +211,7 @@ function FeatureBlock({
 
       {/* Phone mockup */}
       <motion.div
+        style={{ y: reducedMotion ? 0 : drift, rotate: reducedMotion ? 0 : turn }}
         initial={{ opacity: 0, scale: 0.95 }}
         animate={isInView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.6, delay: 0.1 }}
