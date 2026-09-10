@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 
 const discordUrl = "https://discord.gg/vsFH4rbGJ";
-const testFlightUrl = "https://testflight.apple.com/join/jFNV3P5q";
 const googlePlayUrl =
   "https://play.google.com/store/apps/details?id=com.binderwiz";
 
@@ -38,14 +37,14 @@ export default function ContactSection() {
         >
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/15 px-4 py-2 text-sm font-semibold text-primary-light">
             <Sparkles size={16} />
-            Public testing is live
+            Available now on Android
           </div>
           <h2 className="text-3xl font-bold text-text-primary sm:text-5xl">
-            Test BinderWiz and help shape what comes next
+            Get BinderWiz for Android
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-text-secondary sm:text-xl">
-            Install the app, try it with your collection, and tell us what works,
-            what breaks, and what you want us to build next.
+            Your collection, all in one place. Download BinderWiz on Google Play
+            today. Coming soon on iOS.
           </p>
         </motion.div>
 
@@ -63,7 +62,7 @@ export default function ContactSection() {
               Join the BinderWiz Discord
             </h3>
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-text-secondary sm:text-lg">
-              Discord is the main place for tester feedback. Report bugs, suggest
+              Discord is the main place for community feedback. Report bugs, suggest
               improvements, share ideas, and talk directly with the BinderWiz
               team.
             </p>
@@ -106,11 +105,40 @@ export default function ContactSection() {
               Choose your platform
             </p>
             <h3 className="mt-2 text-2xl font-bold text-text-primary sm:text-3xl">
-              Install the BinderWiz test
+              Start your collection with BinderWiz
             </h3>
           </div>
 
           <div className="grid gap-5 md:grid-cols-2">
+            <div className="flex flex-col rounded-2xl border border-primary/55 bg-surface/75 p-6 sm:p-7">
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-card-bg text-primary-light">
+                  <Smartphone size={25} />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-green-400">Android · Available now</p>
+                  <h4 className="text-xl font-bold text-text-primary">
+                    Download from Google Play
+                  </h4>
+                </div>
+              </div>
+
+              <p className="mt-6 flex-1 text-left leading-relaxed text-text-secondary">
+                BinderWiz is now released on Android. Install the app to track
+                prices, organize your binder, and manage your collection.
+              </p>
+
+              <a
+                href={googlePlayUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-5 font-semibold text-white transition-colors hover:bg-primary-light"
+              >
+                Get it on Google Play
+                <ExternalLink size={18} />
+              </a>
+            </div>
+
             <div className="flex flex-col rounded-2xl border border-card-border bg-surface/75 p-6 sm:p-7">
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-card-bg text-primary-light">
@@ -119,67 +147,23 @@ export default function ContactSection() {
                 <div>
                   <p className="text-sm font-medium text-text-muted">iPhone</p>
                   <h4 className="text-xl font-bold text-text-primary">
-                    Join through TestFlight
-                  </h4>
-                </div>
-              </div>
-
-              <ol className="mt-6 space-y-4 text-left text-text-secondary">
-                <li className="flex gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/20 text-sm font-bold text-primary-light">
-                    1
-                  </span>
-                  <span className="pt-0.5">
-                    Download <strong className="text-text-primary">TestFlight</strong>{" "}
-                    from the Apple App Store.
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/20 text-sm font-bold text-primary-light">
-                    2
-                  </span>
-                  <span className="pt-0.5">
-                    Open our invitation link and accept the BinderWiz test.
-                  </span>
-                </li>
-              </ol>
-
-              <a
-                href={testFlightUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-primary/50 bg-primary/10 px-5 font-semibold text-primary-light transition-colors hover:bg-primary/20"
-              >
-                Open TestFlight invitation
-                <ExternalLink size={18} />
-              </a>
-            </div>
-
-            <div className="flex flex-col rounded-2xl border border-card-border bg-surface/75 p-6 sm:p-7">
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-card-bg text-primary-light">
-                  <Smartphone size={25} />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-text-muted">Android</p>
-                  <h4 className="text-xl font-bold text-text-primary">
-                    Download from Google Play
+                    Coming soon on iOS
                   </h4>
                 </div>
               </div>
 
               <p className="mt-6 flex-1 text-left leading-relaxed text-text-secondary">
-                Open the Google Play listing, install BinderWiz, and start
-                testing. No additional testing app is required.
+                BinderWiz is on its way to iPhone. Join our Discord community
+                for updates on the iOS launch.
               </p>
 
               <a
-                href={googlePlayUrl}
+                href={discordUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-primary/50 bg-primary/10 px-5 font-semibold text-primary-light transition-colors hover:bg-primary/20"
               >
-                Open Google Play
+                Follow iOS updates
                 <ExternalLink size={18} />
               </a>
             </div>
@@ -187,8 +171,8 @@ export default function ContactSection() {
         </motion.div>
 
         <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-relaxed text-text-muted">
-          Thank you for testing BinderWiz and helping us improve the app. We
-          truly appreciate your time and feedback.
+          Thank you for being part of BinderWiz. Your feedback helps us make
+          collecting better for everyone.
         </p>
       </div>
     </section>

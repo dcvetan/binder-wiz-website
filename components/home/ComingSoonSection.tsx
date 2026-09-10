@@ -63,7 +63,7 @@ export default function ComingSoonSection() {
             className="mt-8 border-t border-card-border/70 pt-7"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-light mb-5">
-              Planned after release
+              Coming next
             </p>
             <div className="grid gap-3 sm:grid-cols-2">
               {postReleasePlans.map((plan, i) => (

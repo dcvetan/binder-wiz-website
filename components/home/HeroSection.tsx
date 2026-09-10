@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Download } from "lucide-react";
 import PhoneMockup from "@/components/ui/PhoneMockup";
 
 export default function HeroSection() {
@@ -39,9 +39,9 @@ export default function HeroSection() {
           transition={{ duration: 0.5, delay: 0.05 }}
           className="inline-flex items-center gap-2 bg-surface border border-card-border rounded-full px-4 py-1.5 mb-6"
         >
-          <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+          <span className="w-2 h-2 shrink-0 bg-green-400 rounded-full" />
           <span className="text-text-secondary text-sm">
-            Public testing is live on iOS &amp; Android
+            Available on Android · Coming soon on iOS
           </span>
         </motion.div>
 
@@ -70,10 +70,13 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.35 }}
-          href="#testing-phase-2"
-          className="mt-8 inline-flex min-h-12 items-center justify-center rounded-xl bg-primary px-6 font-semibold text-white transition-colors hover:bg-primary-light"
+          href="https://play.google.com/store/apps/details?id=com.binderwiz"
+          target="_blank"
+          rel="noreferrer"
+          className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-6 font-semibold text-white transition-colors hover:bg-primary-light"
         >
-          Start Testing BinderWiz
+          <Download size={20} aria-hidden="true" />
+          Get it on Google Play
         </motion.a>
 
         {/* Phone Mockups */}
