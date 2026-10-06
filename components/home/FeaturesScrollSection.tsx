@@ -11,6 +11,8 @@ import {
   Layers,
   Sparkles,
   Upload,
+  ScanLine,
+  Coins,
 } from "lucide-react";
 import PhoneMockup from "@/components/ui/PhoneMockup";
 
@@ -107,10 +109,32 @@ const features = [
     imageSrc: "/images/mockups/features/import-csv.png",
     imageAlt: "BinderWiz CSV import screen for moving a Pokemon TCG collection from other apps",
   },
+  {
+    icon: Coins,
+    title: "Prices in Your Currency",
+    description:
+      "Set the currency you use for each marketplace. View Cardmarket, eBay, and TCGPlayer prices in EUR, USD, GBP, and more, without changing where the prices come from.",
+    mockupLayout: "double",
+    imageSrc: "/images/mockups/features/currency-picker.png",
+    imageAlt: "BinderWiz currency selection with EUR, USD, GBP, and more",
+    secondaryImageSrc: "/images/mockups/features/currency-settings.png",
+    secondaryImageAlt: "BinderWiz currency settings for Cardmarket, eBay, and TCGPlayer",
+  },
+  {
+    icon: ScanLine,
+    title: "Scan Your Cards",
+    description:
+      "Point your camera at a Pokemon card and let BinderWiz find it. Open the scan result to check the set, card number, variants, and price history without typing a name.",
+    mockupLayout: "double",
+    imageSrc: "/images/mockups/features/scanner-result.png",
+    imageAlt: "BinderWiz card scanner identifying Gengar with variants and price history",
+    secondaryImageSrc: "/images/mockups/features/scanner-camera.png",
+    secondaryImageAlt: "BinderWiz camera scanning a Pokemon card",
+  },
 ];
 
-const featureIds = ["portfolio", "price-details", "graded-prices", "color-matching", "page-upgrades", "pokedex", "expansions", "import"];
-const featureAccents = ["#e9c65c", "#76c8e5", "#e3ad89", "#bb9aff", "#f1a3cb", "#8cd0b0", "#88bdec", "#d3bf8c"];
+const featureIds = ["portfolio", "price-details", "graded-prices", "color-matching", "page-upgrades", "pokedex", "expansions", "import", "currencies", "scanner"];
+const featureAccents = ["#e9c65c", "#76c8e5", "#e3ad89", "#bb9aff", "#f1a3cb", "#8cd0b0", "#88bdec", "#d3bf8c", "#a8d5c2", "#f0be77"];
 
 function FeatureMockups({ feature }: { feature: (typeof features)[0] }) {
   if (
@@ -199,7 +223,7 @@ function FeatureBlock({
           <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg border" style={{ color: featureAccents[index], backgroundColor: `${featureAccents[index]}12`, borderColor: `${featureAccents[index]}40` }}>
             <Icon size={24} />
           </div>
-          <span className="font-mono text-xs text-text-muted"><span style={{ color: featureAccents[index] }}>{String(index + 1).padStart(2, "0")}</span> / 08</span>
+          <span className="font-mono text-xs text-text-muted"><span style={{ color: featureAccents[index] }}>{String(index + 1).padStart(2, "0")}</span> / {String(features.length).padStart(2, "0")}</span>
         </div>
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-text-primary mb-4">
           {feature.title}
