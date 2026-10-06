@@ -11,7 +11,6 @@ const games = [
 ];
 
 const postReleasePlans = [
-  "Camera scan for cards",
   "Japanese and Chinese cards",
   "All grading companies",
   "Improving color matching ever more",
